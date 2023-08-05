@@ -51,9 +51,13 @@ if (isset($_POST['submit'])) {
             <div class="mb-3">
                 <label class="form-label">Department</label>
                 <select class="form-select" name="id_department">
-                    <option value="1" <?php echo ($id_department == '1') ? 'selected' : ''; ?>>1</option>
-                    <option value="2" <?php echo ($id_department == '2') ? 'selected' : ''; ?>>2</option>
-                    <option value="3" <?php echo ($id_department == '3') ? 'selected' : ''; ?>>3</option>
+                    <?php
+                    $query = mysqli_query($conn, "SELECT * FROM department") or die(mysqli_error($conn));
+                    while ($data = mysqli_fetch_array($query)) {
+                        $selected = ($data['id_department'] == $id_department) ? 'selected' : '';
+                        echo "<option value='$data[id_department]' $selected> $data[name_department]</option>";
+                    }
+                    ?>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary" name="submit">Update</button>

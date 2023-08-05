@@ -21,27 +21,32 @@ include 'connect.php';
                     <th scope="col">NO</th>
                     <th scope="col">NIK</th>
                     <th scope="col">NAME</th>
-                    <th scope="col">ID DEPARTMENT</th>
+                    <!-- <th scope="col">ID DEPARTMENT</th> -->
+                    <th scope="col">SALARY</th>
+                    <th scope="col">BONUS</th>
                     <th scope="col">ACTION</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 $no = 1;
-                $sql = "SELECT * FROM employee";
+                // $sql = "SELECT * FROM employee";
+                $sql = "SELECT * FROM employee LEFT JOIN department ON employee.id_department = department.id_department";
                 $result = mysqli_query($conn, $sql);
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         $id_employee = $row['id_employee'];
                         $nik = $row['nik'];
                         $name = $row['name'];
-                        $id_department = $row['id_department'];
+                        $salary = $row['salary'];
+                        $bonus = $row['bonus'];
                         echo
                         '<tr>
                         <th scope="row">' . $no . '</th>
                         <td>' . $nik . '</td>
                         <td>' . $name . '</td>
-                        <td>' . $id_department . '</td>
+                        <td>' . $salary . '</td>
+                        <td>' . $bonus . '</td>
                         <td>
                         <button class="btn btn-primary"><a href="updateData.php?updateid=' . $id_employee . '" class="text-light">Edit</a></button>
                         <button class="btn btn-danger"><a href="deleteData.php?deleteid=' . $id_employee . '" class="text-light">Delete</a></button>

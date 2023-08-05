@@ -43,9 +43,16 @@ if (isset($_POST['submit'])) {
                 <label class="form-label">Department</label>
                 <select class="form-select" name="id_department">
                     <option selected>Select</option>
+                    <?php
+                    $query = mysqli_query($conn, "SELECT * FROM department") or die(mysqli_error($conn));
+                    while ($data = mysqli_fetch_array($query)) {
+                        echo "<option value='$data[id_department]'> $data[name_department]</option>";
+                    }
+                    ?>
+                    <!-- <option selected>Select</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
-                    <option value="3">3</option>
+                    <option value="3">3</option> -->
                 </select>
             </div>
             <button type="submit" class="btn btn-primary" name="submit">Submit</button>
